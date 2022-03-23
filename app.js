@@ -49,7 +49,7 @@ function displayModal(index) {
     let { name, dob, phone, email, location: { city, street, state, postcode}, picture } = employees[index];
 
     let date = new Date(dob.date);
-
+    // template literal to insert HTML and pull from above data points
     const modalHTML = `
         <img class="avatar" src = "${picture.large}">
         <div class="text-container">
@@ -58,13 +58,28 @@ function displayModal(index) {
             <p class="address">${city}</p>
             <hr>
             <p>${phone}</p>
-            <p class="address">${street}, ${state} ${postcode}</p>
-            <p>Birthday: ${date.getMonth()}/${date.getDate()}/${date.getFullYear}</p>
+            <p class="address">${street.number} ${street.name}, ${state} ${postcode}</p>
+            <p>Birthday: ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>
         </div>
     `;
 
     overlay.classList.remove("hidden");
     modalContainer.innerHTML = modalHTML;
-
 }
+
+gridContainer.addEventListener('click', e => {
+    // make sure click is not on grid container itself
+    if (e.target !== gridContainer) {
+        // select the card element based on its procimity to actual element clicked
+        const card = e.target.closest(".card");
+        const index = card.getAttribute('data-index');
+        displayModal(index);
+    }
+});
+
+// remove stsatic markup from index.html
+modalClose.addEventListener('click', () => {
+    overlay.classList.add('hidden')
+});
+
 
