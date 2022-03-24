@@ -6,8 +6,10 @@ const gridContainer = document.querySelector(".grid-container");
 const overlay = document.querySelector(".overlay");
 const modalContainer = document.querySelector(".modal-content");
 const modalClose = document.querySelector(".modal-close");
+const searchBar = document.querySelector(".searchBar");
+const employeeName = document.querySelectorAll(".name");
+const employeeCards = document.querySelectorAll(".card");
 
-// fetch data from API
 fetch(urlAPI)                           // pass url information to fetch
     .then(res => res.json())            // format the response as JSON
     .then(res => res.results)           // return results value of response 
@@ -83,3 +85,17 @@ modalClose.addEventListener('click', () => {
 });
 
 
+function filterEmployee() {
+
+    let searchQuery = document.querySelector(".searchBar").value;
+    for (let i=0; i<employeeCards.length; i++) {
+        if (employeeName[i].innerText.toLowerCase().includes(searchQuery.toLowerCase())) {
+            console.log(employeeName[i].innerText);
+        } else {
+            employeeCards[i].classList.add('hidden');
+        }
+    }
+    
+}
+
+searchBar.addEventListener('keyup', filterEmployee());
