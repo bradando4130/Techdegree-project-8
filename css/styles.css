@@ -39,10 +39,6 @@ body {
   background: none;
 }
 
-.hidden {
-  display: none;
-}
-
 /* grid container and grid layout design */
 .grid-container {
   display: grid;
@@ -95,6 +91,10 @@ hr {
   border-radius: 5px;
   border: 1px solid #778;
   font-size: 1.2em;
+}
+
+.hidden {
+  display: none;
 }
 
 /*# sourceMappingURL=styles.css.map */

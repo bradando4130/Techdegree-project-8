@@ -1,14 +1,13 @@
 // global variables
 let employees = [];
-const urlAPI = `https://randomuser.me/api/?results=12&inc=name, picture,
-email, location, phone, dob &noinfo &nat=US`
+const urlAPI = `https://randomuser.me/api/?results=12&inc=name,picture,email,location,phone,dob&noinfo&nat=US`
 const gridContainer = document.querySelector(".grid-container");
 const overlay = document.querySelector(".overlay");
 const modalContainer = document.querySelector(".modal-content");
 const modalClose = document.querySelector(".modal-close");
-const searchBar = document.querySelector(".searchBar");
-const employeeName = document.querySelectorAll(".name");
-const employeeCards = document.querySelectorAll(".card");
+let searchBar = document.querySelector(".searchBar");
+let employeeName = document.querySelectorAll(".name");
+let employeeCards = document.querySelectorAll(".card");
 
 fetch(urlAPI)                           // pass url information to fetch
     .then(res => res.json())            // format the response as JSON
@@ -43,6 +42,9 @@ function displayEmployees(employeeData) {
         `
     });
     gridContainer.innerHTML = employeeHTML;
+    // IMPORTANT update employeeName and employeeCard cariables with new data from fucntion
+    employeeName = document.querySelectorAll(".name");
+    employeeCards = document.querySelectorAll(".card");
 }
 
 function displayModal(index) {
@@ -84,13 +86,12 @@ modalClose.addEventListener('click', () => {
     overlay.classList.add('hidden')
 });
 
-
 function filterEmployee() {
-
     let searchQuery = document.querySelector(".searchBar").value;
+    // loop through cards to crosscheck if name includes searchQuery and update class
     for (let i=0; i<employeeCards.length; i++) {
         if (employeeName[i].innerText.toLowerCase().includes(searchQuery.toLowerCase())) {
-            console.log(employeeName[i].innerText);
+            employeeCards[i].classList = "card";
         } else {
             employeeCards[i].classList.add('hidden');
         }
