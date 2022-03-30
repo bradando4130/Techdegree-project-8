@@ -38,6 +38,19 @@ body {
   background: none;
 }
 
+/* Modal toggle buttons for switching modal for employees */
+.buttonToggle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalLeft,
+.modalRight {
+  max-width: 25px;
+  display: grid;
+  place-items: center;
+}
+
 /* grid container and grid layout design */
 .grid-container {
   display: grid;

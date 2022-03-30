@@ -8,6 +8,10 @@ const modalClose = document.querySelector(".modal-close");
 let searchBar = document.querySelector(".searchBar");
 let employeeName = document.querySelectorAll(".name");
 let employeeCards = document.querySelectorAll(".card");
+let modalData;
+let modalToggleleft = document.querySelector('.modalLeft');
+let modalToggleRight = document.querySelector('.modalRight');
+let modalIndex;
 
 fetch(urlAPI)                           // pass url information to fetch
     .then(res => res.json())            // format the response as JSON
@@ -63,12 +67,15 @@ function displayModal(index) {
             <hr>
             <p>${phone}</p>
             <p class="address">${street.number} ${street.name}, ${state} ${postcode}</p>
-            <p>Birthday: ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>
+            <p>Birthday: ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>    
         </div>
     `;
 
     overlay.classList.remove("hidden");
     modalContainer.innerHTML = modalHTML;
+    modalData = document.querySelector('.modal-content');
+    modalToggleleft = document.querySelector('.modalLeft');
+    modalToggleRight = document.querySelector('.modalRight');
 }
 
 gridContainer.addEventListener('click', e => {
@@ -77,6 +84,7 @@ gridContainer.addEventListener('click', e => {
         // select the card element based on its procimity to actual element clicked
         const card = e.target.closest(".card");
         const index = card.getAttribute('data-index');
+        modalIndex = parseInt(index);   
         displayModal(index);
     }
 });
@@ -100,3 +108,26 @@ function filterEmployee() {
 }
 
 searchBar.addEventListener('keyup', filterEmployee());
+
+// toggle modal through employees based on left or right modal button clicks
+// this is done by repopulating the html of modal based on 'data-index' value and increasing or decreasing it accordingly
+// SUPER PROUD OF THIS!
+modalToggleRight.addEventListener('click', () => {
+    if (modalIndex === 11) {
+        modalIndex = 0;
+        displayModal(modalIndex)
+    } else {
+        displayModal(modalIndex += 1)
+    }
+    
+});
+
+
+modalToggleleft.addEventListener('click', () => {
+    if (modalIndex === 0) {
+        modalIndex = 11;
+        displayModal(modalIndex)
+    } else {
+        displayModal(modalIndex -= 1)
+    }
+});
