@@ -32,9 +32,15 @@ body {
     position: absolute;
     right: 15px;
     top: 5px;
+}
+
+.modal-close,
+.modalLeft,
+.modalRight {
     cursor: pointer;
     border: none;
     background: none;
+    font-weight: 700;
 }
 
 /* Modal toggle buttons for switching modal for employees */@at-root
@@ -45,7 +51,7 @@ body {
 
 .modalLeft,
 .modalRight {
-    max-width: 25px;
+    max-width: 30px;
     display: grid;
     place-items: center;
 }
